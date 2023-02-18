@@ -1,0 +1,44 @@
+type Encargado {
+    id: Int!
+    nombre: String!
+    dni: String!
+}
+
+type Parada {
+    id: Int!
+    nombre: String!
+    direccion: String!
+    encargado: Encargado!
+    linea: Linea!
+}
+
+type Linea {
+    id: Int!
+    numero: Int!
+    tipo: String!
+    paradas: [Parada]!
+}
+
+type Query {
+    allEncargados: [Encargado]
+    allParadas: [Parada]
+    allLineas: [Linea]
+
+    encargado(id: Int!): Encargado
+    parada(id: Int!): Parada
+    linea(id: Int!): Linea
+}
+
+type Mutation {
+    createEncargado(nombre: String!, dni: String!): Encargado
+    createParada(nombre: String!, direccion: String!, encargadoId: Int!, lineaId: Int!): Parada
+    createLinea(numero: Int!, tipo: String!): Linea
+
+    updateEncargado(id: Int!, nombre: String!, dni: String!): Encargado
+    updateParada(id: Int!, nombre: String!, direccion: String!, encargadoId: Int!, lineaId: Int!): Parada
+    updateLinea(id: Int!, numero: Int!, tipo: String!): Linea
+
+    deleteEncargado(id: Int!): Encargado
+    deleteParada(id: Int!): Parada
+    deleteLinea(id: Int!): Linea
+}
