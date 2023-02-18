@@ -23,6 +23,11 @@ public class LineaController {
         this.paradaServices = paradaServices;
     }
 
+    @SchemaMapping
+    public List<Parada> paradas(Linea linea) {
+        return paradaServices.getParadasByLineaId(linea.getId());
+    }
+
     @QueryMapping
     public List<Linea> allLineas() {
         return lineaServices.getLineas();
@@ -31,11 +36,6 @@ public class LineaController {
     @QueryMapping
     public Linea linea(@Argument int id) {
         return lineaServices.getLineaById(id);
-    }
-
-    @SchemaMapping
-    public List<Parada> paradas(Linea linea) {
-        return paradaServices.getParadasByLineaId(linea.getId());
     }
 
     @MutationMapping

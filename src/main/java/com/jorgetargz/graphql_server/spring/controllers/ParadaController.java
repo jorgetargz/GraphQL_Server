@@ -27,16 +27,6 @@ public class ParadaController {
         this.encargadoServices = encargadoServices;
     }
 
-    @QueryMapping
-    public List<Parada> allParadas() {
-        return paradaServices.getParadas();
-    }
-
-    @QueryMapping
-    public Parada parada(@Argument int id) {
-        return paradaServices.getParadaById(id);
-    }
-
     @SchemaMapping
     public Linea linea(Parada parada) {
         return lineaServices.getLineaById(parada.getIdLinea());
@@ -45,6 +35,16 @@ public class ParadaController {
     @SchemaMapping
     public Encargado encargado(Parada parada) {
         return encargadoServices.getEncargadoById(parada.getIdEncargado());
+    }
+
+    @QueryMapping
+    public List<Parada> allParadas() {
+        return paradaServices.getParadas();
+    }
+
+    @QueryMapping
+    public Parada parada(@Argument int id) {
+        return paradaServices.getParadaById(id);
     }
 
     @MutationMapping
@@ -74,6 +74,5 @@ public class ParadaController {
     public void deleteParada(@Argument int id) {
         paradaServices.deleteParadaById(id);
     }
-
 
 }

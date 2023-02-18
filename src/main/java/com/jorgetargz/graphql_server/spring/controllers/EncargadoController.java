@@ -1,10 +1,13 @@
 package com.jorgetargz.graphql_server.spring.controllers;
 
 import com.jorgetargz.graphql_server.domain.modelo.Encargado;
+import com.jorgetargz.graphql_server.domain.modelo.Parada;
 import com.jorgetargz.graphql_server.domain.services.EncargadoServices;
+import com.jorgetargz.graphql_server.domain.services.ParadaServices;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -12,10 +15,17 @@ import java.util.List;
 @Controller
 public class EncargadoController {
 
+    private final ParadaServices paradaServices;
     private final EncargadoServices encargadoServices;
 
-    public EncargadoController(EncargadoServices encargadoServices) {
+    public EncargadoController(ParadaServices paradaServices, EncargadoServices encargadoServices) {
+        this.paradaServices = paradaServices;
         this.encargadoServices = encargadoServices;
+    }
+
+    @SchemaMapping
+    public Parada parada(Encargado encargado) {
+        return paradaServices.getParadaByEncargadoId(encargado.getId());
     }
 
     @QueryMapping

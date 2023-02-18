@@ -35,6 +35,10 @@ public class ParadaServices {
                 .toList();
     }
 
+    public Parada getParadaByEncargadoId(Integer id) {
+        return paradaRepository.findByEncargadoId(id);
+    }
+
     public Parada getParadaById(int id) {
         return paradaMapper.toParada(paradaRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Parada no encontrada")));

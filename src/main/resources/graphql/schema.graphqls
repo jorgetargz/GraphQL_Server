@@ -2,6 +2,7 @@ type Encargado {
     id: Int!
     nombre: String!
     dni: String!
+    parada: Parada!
 }
 
 type Parada {
