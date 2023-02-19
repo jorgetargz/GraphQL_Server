@@ -1,5 +1,6 @@
 package com.jorgetargz.graphql_server.dao.modelo;
 
+import com.jorgetargz.graphql_server.dao.common.Constantes;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 
 @Entity
-@Table(name = "paradas")
+@Table(name = Constantes.PARADAS_TABLE_NAME)
 public class ParadaEntity {
 
     @Id

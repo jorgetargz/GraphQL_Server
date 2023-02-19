@@ -2,6 +2,7 @@ package com.jorgetargz.graphql_server.domain.services;
 
 import com.jorgetargz.graphql_server.dao.LineaRepository;
 import com.jorgetargz.graphql_server.dao.mappers.LineaMapper;
+import com.jorgetargz.graphql_server.domain.common.Constantes;
 import com.jorgetargz.graphql_server.domain.excepciones.NotFoundException;
 import com.jorgetargz.graphql_server.domain.modelo.Linea;
 import org.springframework.stereotype.Service;
@@ -24,14 +25,14 @@ public class LineaServices {
                 .map(lineaMapper::toLinea)
                 .toList();
         if (lineas.isEmpty()) {
-            throw new NotFoundException("No hay lineas");
+            throw new NotFoundException(Constantes.NO_HAY_LINEAS);
         }
         return lineas;
     }
 
     public Linea getLineaById(int id) {
         return lineaMapper.toLinea(lineaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Linea no encontrada")));
+                .orElseThrow(() -> new NotFoundException(Constantes.LINEA_NO_ENCONTRADA)));
     }
 
     public Linea createLinea(Linea linea) {

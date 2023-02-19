@@ -2,6 +2,7 @@ package com.jorgetargz.graphql_server.domain.services;
 
 import com.jorgetargz.graphql_server.dao.EncargadoRepository;
 import com.jorgetargz.graphql_server.dao.mappers.EncargadoMapper;
+import com.jorgetargz.graphql_server.domain.common.Constantes;
 import com.jorgetargz.graphql_server.domain.excepciones.NotFoundException;
 import com.jorgetargz.graphql_server.domain.modelo.Encargado;
 import org.springframework.stereotype.Service;
@@ -24,14 +25,14 @@ public class EncargadoServices {
                 .map(encargadoMapper::toEncargado)
                 .toList();
         if (encargados.isEmpty()) {
-            throw new NotFoundException("No hay encargados");
+            throw new NotFoundException(Constantes.NO_HAY_ENCARGADOS);
         }
         return encargados;
     }
 
     public Encargado getEncargadoById(int id) {
         return encargadoMapper.toEncargado(encargadoRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Encargado no encontrado")));
+                .orElseThrow(() -> new NotFoundException(Constantes.ENCARGADO_NO_ENCONTRADO)));
     }
 
     public Encargado createEncargado(Encargado encargado) {

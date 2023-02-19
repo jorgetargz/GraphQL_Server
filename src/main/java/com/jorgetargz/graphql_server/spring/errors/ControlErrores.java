@@ -1,6 +1,7 @@
 package com.jorgetargz.graphql_server.spring.errors;
 
 import com.jorgetargz.graphql_server.domain.excepciones.NotFoundException;
+import com.jorgetargz.graphql_server.spring.common.Constantes;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,21 +21,21 @@ public class ControlErrores extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiError> handleNotFoundException(NotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ApiError(e.getMessage(), "404"));
+                .body(new ApiError(e.getMessage(), Constantes.NOT_FOUND_CODE));
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiError> handleAccessException(AccessDeniedException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(new ApiError(e.getMessage(), "403"));
+                .body(new ApiError(e.getMessage(), Constantes.UNAUTHORIZED_CODE));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ApiError> handleDataIntegrityException(DataIntegrityViolationException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ApiError(e.getMessage(), "400"));
+                .body(new ApiError(e.getMessage(), Constantes.BAD_REQUEST_CODE));
     }
 
 }

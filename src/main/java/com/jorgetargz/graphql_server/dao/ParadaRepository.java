@@ -1,5 +1,6 @@
 package com.jorgetargz.graphql_server.dao;
 
+import com.jorgetargz.graphql_server.dao.common.Constantes;
 import com.jorgetargz.graphql_server.dao.modelo.ParadaEntity;
 import com.jorgetargz.graphql_server.domain.modelo.Parada;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,9 +12,9 @@ import java.util.List;
 @Repository
 public interface ParadaRepository extends JpaRepository<ParadaEntity, Integer> {
 
-    @Query("SELECT p FROM ParadaEntity p WHERE p.idLinea = ?1")
+    @Query(Constantes.SELECT_PARADAS_BY_LINEA_QUERY)
     List<ParadaEntity> findAllByLineaId(int idLinea);
 
-    @Query("SELECT p FROM ParadaEntity p WHERE p.idEncargado = ?1")
+    @Query(Constantes.SELECT_ENCARGADO_BY_LINEA_QUERY)
     Parada findByEncargadoId(Integer id);
 }

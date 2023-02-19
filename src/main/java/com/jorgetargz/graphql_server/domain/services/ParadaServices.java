@@ -2,6 +2,7 @@ package com.jorgetargz.graphql_server.domain.services;
 
 import com.jorgetargz.graphql_server.dao.ParadaRepository;
 import com.jorgetargz.graphql_server.dao.mappers.ParadaMapper;
+import com.jorgetargz.graphql_server.domain.common.Constantes;
 import com.jorgetargz.graphql_server.domain.excepciones.NotFoundException;
 import com.jorgetargz.graphql_server.domain.modelo.Parada;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ParadaServices {
                 .map(paradaMapper::toParada)
                 .toList();
         if (paradas.isEmpty()) {
-            throw new NotFoundException("No hay paradas");
+            throw new NotFoundException(Constantes.NO_HAY_PARADAS);
         }
         return paradas;
     }
@@ -41,7 +42,7 @@ public class ParadaServices {
 
     public Parada getParadaById(int id) {
         return paradaMapper.toParada(paradaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Parada no encontrada")));
+                .orElseThrow(() -> new NotFoundException(Constantes.PARADA_NO_ENCONTRADA)));
     }
 
     public Parada createParada(Parada parada) {
